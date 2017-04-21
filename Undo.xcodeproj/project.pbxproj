@@ -16,6 +16,8 @@
 		00FB72531EAA734E003903B5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB72521EAA734E003903B5 /* CalendarViewController.swift */; };
 		00FB72551EAA7DB5003903B5 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB72541EAA7DB5003903B5 /* AddViewController.swift */; };
 		00FB72571EAA7DC0003903B5 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB72561EAA7DC0003903B5 /* EditViewController.swift */; };
+		00FB725D1EAA8790003903B5 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB725C1EAA8790003903B5 /* Todo.swift */; };
+		00FB72601EAA894F003903B5 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB725F1EAA894F003903B5 /* TodoManager.swift */; };
 		21790033BE945FE5DFCE5AFC /* Pods_Undo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE701DAF2AC9AF8DAF01496 /* Pods_Undo.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		00FB72521EAA734E003903B5 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		00FB72541EAA7DB5003903B5 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		00FB72561EAA7DC0003903B5 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		00FB725C1EAA8790003903B5 /* Todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		00FB725F1EAA894F003903B5 /* TodoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		453AEBA1EEFB3507448A713F /* Pods-Undo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Undo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Undo/Pods-Undo.release.xcconfig"; sourceTree = "<group>"; };
 		903A11C1CC6ED104E67EC694 /* Pods-Undo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Undo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Undo/Pods-Undo.debug.xcconfig"; sourceTree = "<group>"; };
 		CDE701DAF2AC9AF8DAF01496 /* Pods_Undo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Undo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				00C602DF1EA9B40B00FFCC5A /* Undo.entitlements */,
+				00FB725E1EAA88C0003903B5 /* Managers */,
 				00A966451EA9AC1900186BEC /* Models */,
 				00A966461EA9AC3200186BEC /* Views */,
 				00A966471EA9AC3700186BEC /* Controllers */,
@@ -86,6 +91,7 @@
 		00A966451EA9AC1900186BEC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				00FB725C1EAA8790003903B5 /* Todo.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -107,6 +113,14 @@
 				00FB72561EAA7DC0003903B5 /* EditViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		00FB725E1EAA88C0003903B5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				00FB725F1EAA894F003903B5 /* TodoManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		7B7547B67A6930AC307D0F42 /* Frameworks */ = {
@@ -255,10 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00FB725D1EAA8790003903B5 /* Todo.swift in Sources */,
 				00FB72551EAA7DB5003903B5 /* AddViewController.swift in Sources */,
 				00FB72531EAA734E003903B5 /* CalendarViewController.swift in Sources */,
 				00FB72571EAA7DC0003903B5 /* EditViewController.swift in Sources */,
 				00A966491EA9ADB000186BEC /* LoginViewController.swift in Sources */,
+				00FB72601EAA894F003903B5 /* TodoManager.swift in Sources */,
 				00FB72511EAA6AEC003903B5 /* ListViewController.swift in Sources */,
 				001A419F1EA973EB00D30D9B /* AppDelegate.swift in Sources */,
 			);

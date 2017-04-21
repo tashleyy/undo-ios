@@ -6,7 +6,6 @@
 //  Copyright © 2017 Tiffany Tjahjadi. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class EditViewController: UIViewController, UINavigationBarDelegate {
@@ -18,5 +17,13 @@ class EditViewController: UIViewController, UINavigationBarDelegate {
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.topAttached
+    }
+
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func savePressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

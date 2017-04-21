@@ -6,7 +6,6 @@
 //  Copyright © 2017 Tiffany Tjahjadi. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class CalendarViewController: UIViewController, UINavigationBarDelegate {
