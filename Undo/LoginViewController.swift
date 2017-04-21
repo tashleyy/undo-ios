@@ -22,11 +22,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         loginButton.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if ((FBSDKAccessToken.current()) != nil) {
+            moveToNext()
+        }
+    }
+    
+    func moveToNext() {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let lvc: ListViewController = storyboard.instantiateViewController(withIdentifier: "listVC") as! ListViewController
+        present(lvc, animated: false, completion: nil)
+    }
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if (error != nil) {
             print("\(error)")
         } else if (result.token != nil) {
-            print("Success, navigate away")
+            moveToNext()
         } else {
             print("FAILURE")
         }
