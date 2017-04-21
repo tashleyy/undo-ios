@@ -26,4 +26,9 @@ class ListViewController: UIViewController, UINavigationBarDelegate {
         let cvc: CalendarViewController = storyboard.instantiateViewController(withIdentifier: "calendarVC") as! CalendarViewController
         present(cvc, animated: false, completion: nil)
     }
+    @IBAction func addPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let avc: AddViewController = storyboard.instantiateViewController(withIdentifier: "addVC") as! AddViewController
+        present(avc, animated: true, completion: nil)
+    }
 }
