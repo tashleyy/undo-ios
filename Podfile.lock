@@ -18,10 +18,12 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.22.0):
     - FBSDKCoreKit
+  - JTAppleCalendar (7.0.1)
 
 DEPENDENCIES:
   - Eureka
   - FacebookLogin
+  - JTAppleCalendar
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -30,7 +32,8 @@ SPEC CHECKSUMS:
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FBSDKCoreKit: c693bad19feb225469eeff14452ba364522ee48b
   FBSDKLoginKit: 1fa529fc622d7b32ebeaffbecd377180833c6d30
+  JTAppleCalendar: 7c8cba3e06fd6fdfed72382eeeb87c304e727ddb
 
-PODFILE CHECKSUM: 4675995dcdb960a55b83af9d38cc791ef8492c96
+PODFILE CHECKSUM: 8bbdbd22942102eb485ae402e9c89967fb75c731
 
 COCOAPODS: 1.2.1
