@@ -33,8 +33,8 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
 
     @IBAction func addPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let avc: AddViewController = storyboard.instantiateViewController(withIdentifier: "addVC") as! AddViewController
-        present(avc, animated: true, completion: nil)
+        let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navAddVC") as! UINavigationController
+        present(nc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,7 +56,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let evc: EditViewController = storyboard.instantiateViewController(withIdentifier: "editVC") as! EditViewController
-        present(evc, animated: true, completion: nil)
+        let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navEditVC") as! UINavigationController
+        present(nc, animated: true, completion: nil)
     }
 }

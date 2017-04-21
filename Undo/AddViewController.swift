@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import Eureka
 
-class AddViewController: UIViewController, UINavigationBarDelegate {
-    @IBOutlet weak var navBar: UINavigationBar!
-
+class AddViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        navBar.delegate = self
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return UIBarPosition.topAttached
+        
+        form +++ Section()
+            <<< TextRow() { row in
+                row.title = "Name"
+                row.placeholder = "Dominate the world"
+            }
+            <<< DateRow() {
+                $0.title = "Due Date"
+                $0.value = Date(timeIntervalSinceNow: 0)
+            }
     }
 
     @IBAction func cancelPressed(_ sender: Any) {

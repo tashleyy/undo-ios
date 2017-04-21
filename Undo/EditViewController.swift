@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import Eureka
 
-class EditViewController: UIViewController, UINavigationBarDelegate {
-    @IBOutlet weak var navBar: UINavigationBar!
-    
+class EditViewController: FormViewController {
     override func viewDidLoad() {
-        navBar.delegate = self
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return UIBarPosition.topAttached
+        super.viewDidLoad()
+        
+        form +++ Section()
+            <<< TextRow() { row in
+                row.title = "Name"
+                row.value = "Dominate the world"
+            }
+            <<< DateRow() {
+                $0.title = "Due Date"
+                $0.value = Date(timeIntervalSinceNow: 0)
+            }
+            <<< ButtonRow("deleteTodo") {
+                $0.title = "Delete Todo"
+            }
+        
+        let buttonRow: ButtonRow? = form.rowBy(tag: "deleteTodo")
+        let evc = self
+        buttonRow?.onCellSelection { cell, row in
+            evc.dismiss(animated: true, completion: nil)
+        }
     }
 
     @IBAction func cancelPressed(_ sender: Any) {

@@ -25,7 +25,7 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
 
     @IBAction func addPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let avc: AddViewController = storyboard.instantiateViewController(withIdentifier: "addVC") as! AddViewController
-        present(avc, animated: true, completion: nil)
+        let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navAddVC") as! UINavigationController
+        present(nc, animated: true, completion: nil)
     }
 }
