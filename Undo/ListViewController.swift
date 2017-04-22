@@ -15,10 +15,13 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        todos = TodoManager.get()
         navBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        TodoManager.sharedInstance.get(withCompletion: { (todos) in
+            self.todos = todos
+            self.tableView.reloadData()
+        })
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {

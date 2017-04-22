@@ -6,4 +6,6 @@ target 'Undo' do
   pod 'FacebookLogin'
   pod 'Eureka'
   pod 'JTAppleCalendar'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 end

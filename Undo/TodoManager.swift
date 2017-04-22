@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import Firebase
 
 class TodoManager: NSObject {
-    class func get() -> [Todo] {
+    static let sharedInstance = TodoManager()
+    var ref: FIRDatabaseReference!
+
+    private override init() { }
+    
+    func configureDatabase() {
+        ref = FIRDatabase.database().reference().child("todos")
+    }
+    
+    func get(withCompletion callback: @escaping ([Todo]) -> ()) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        
-        var result: [Todo] = []
-        result.append(Todo(name: "to do 1", dueDate: formatter.date(from: "2017/04/21")!))
-        result.append(Todo(name: "to do 2", dueDate: formatter.date(from: "2017/04/22")!))
-        return result
+
+        self.ref.observeSingleEvent(of: .value, with: { snapshot in
+            var result: [Todo] = []
+            for todoSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                guard let todo = todoSnapshot.value as? [String:String] else { continue }
+                result.append(Todo(name: todo["name"]!, dueDate: formatter.date(from: todo["dueDate"]!)!))
+            }
+            callback(result)
+        })
     }
 }

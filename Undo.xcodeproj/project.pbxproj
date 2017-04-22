@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000962CB1EAAEE1600C7536E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000962CA1EAAEE1600C7536E /* GoogleService-Info.plist */; };
 		001A419F1EA973EB00D30D9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A419E1EA973EB00D30D9B /* AppDelegate.swift */; };
 		001A41A41EA973EB00D30D9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 001A41A21EA973EB00D30D9B /* Main.storyboard */; };
 		001A41A61EA973EB00D30D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 001A41A51EA973EB00D30D9B /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000962CA1EAAEE1600C7536E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Undo/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		001A419B1EA973EB00D30D9B /* Undo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Undo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		001A419E1EA973EB00D30D9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		001A41A31EA973EB00D30D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		001A41921EA973EB00D30D9B = {
 			isa = PBXGroup;
 			children = (
+				000962CA1EAAEE1600C7536E /* GoogleService-Info.plist */,
 				001A419D1EA973EB00D30D9B /* Undo */,
 				001A419C1EA973EB00D30D9B /* Products */,
 				CB85BCE8CDC6F4BEB2EADFE7 /* Pods */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				001A41A91EA973EB00D30D9B /* LaunchScreen.storyboard in Resources */,
+				000962CB1EAAEE1600C7536E /* GoogleService-Info.plist in Resources */,
 				001A41A61EA973EB00D30D9B /* Assets.xcassets in Resources */,
 				001A41A41EA973EB00D30D9B /* Main.storyboard in Resources */,
 			);
