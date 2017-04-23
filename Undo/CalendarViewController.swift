@@ -66,7 +66,7 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     }
 
     @IBAction func togglePressed(_ sender: Any) {
-        dismiss(animated: false, completion: nil)
+        (parent as? UITabBarController)?.selectedIndex = 0
     }
 
     @IBAction func addPressed(_ sender: Any) {

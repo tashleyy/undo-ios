@@ -32,9 +32,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
 
     @IBAction func togglePressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let cvc: CalendarViewController = storyboard.instantiateViewController(withIdentifier: "calendarVC") as! CalendarViewController
-        present(cvc, animated: false, completion: nil)
+        (parent as? UITabBarController)?.selectedIndex = 1
     }
 
     @IBAction func addPressed(_ sender: Any) {

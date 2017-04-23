@@ -29,8 +29,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func moveToNext() {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let lvc: ListViewController = storyboard.instantiateViewController(withIdentifier: "listVC") as! ListViewController
-        present(lvc, animated: false, completion: nil)
+        let tvc: UITabBarController = storyboard.instantiateViewController(withIdentifier: "tabVC") as! UITabBarController
+        present(tvc, animated: false, completion: nil)
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
