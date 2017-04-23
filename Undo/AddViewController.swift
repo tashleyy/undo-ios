@@ -14,11 +14,11 @@ class AddViewController: FormViewController {
         super.viewDidLoad()
         
         form +++ Section()
-            <<< TextRow() { row in
+            <<< TextRow("nameRow") { row in
                 row.title = "Name"
                 row.placeholder = "Dominate the world"
             }
-            <<< DateRow() {
+            <<< DateRow("dueDateRow") {
                 $0.title = "Due Date"
                 $0.value = Date(timeIntervalSinceNow: 0)
             }
@@ -29,6 +29,12 @@ class AddViewController: FormViewController {
     }
 
     @IBAction func savePressed(_ sender: Any) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let name = (form.rowBy(tag: "nameRow") as? TextRow)?.value
+        let dueDate = (form.rowBy(tag: "dueDateRow") as? DateRow)?.value
+        
+        TodoManager.sharedInstance.add(todo: Todo(name: name ?? "", dueDate: dueDate!))
         dismiss(animated: true, completion: nil)
     }
 }

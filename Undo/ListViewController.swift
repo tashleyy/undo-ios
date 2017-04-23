@@ -18,10 +18,13 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         navBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        TodoManager.sharedInstance.get(withCompletion: { (todos) in
-            self.todos = todos
-            self.tableView.reloadData()
-        })
+        TodoManager.sharedInstance.subscribe { self.reloadData() }
+        reloadData()
+    }
+    
+    func reloadData() {
+        todos = TodoManager.sharedInstance.get()
+        tableView.reloadData()
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
