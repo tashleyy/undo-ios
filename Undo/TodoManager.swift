@@ -55,6 +55,16 @@ class TodoManager: NSObject {
         processSubscriptions()
     }
     
+    func edit(todo: Todo, atIndex index: Int) {
+        todos[index] = todo
+        processSubscriptions()
+    }
+    
+    func delete(index: Int) {
+        todos.remove(at: index)
+        processSubscriptions()
+    }
+    
     func subscribe(callback: @escaping () -> ()) {
         subscriptions.append(callback)
     }

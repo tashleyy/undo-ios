@@ -10,17 +10,21 @@ import UIKit
 import Eureka
 
 class EditViewController: FormViewController {
+    var index: Int?
+    var initialName: String?
+    var initialDueDate: Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         form +++ Section()
-            <<< TextRow() { row in
+            <<< TextRow("nameRow") { row in
                 row.title = "Name"
-                row.value = "Dominate the world"
+                row.value = initialName!
             }
-            <<< DateRow() {
+            <<< DateRow("dueDateRow") {
                 $0.title = "Due Date"
-                $0.value = Date(timeIntervalSinceNow: 0)
+                $0.value = initialDueDate!
             }
             <<< ButtonRow("deleteTodo") {
                 $0.title = "Delete Todo"
@@ -37,10 +41,17 @@ class EditViewController: FormViewController {
     }
 
     @IBAction func savePressed(_ sender: Any) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let name = (form.rowBy(tag: "nameRow") as? TextRow)?.value
+        let dueDate = (form.rowBy(tag: "dueDateRow") as? DateRow)?.value
+
+        TodoManager.sharedInstance.edit(todo: Todo(name: name ?? "", dueDate: dueDate!), atIndex: index!)
         dismiss(animated: true, completion: nil)
     }
     
     func deletePressed() {
+        TodoManager.sharedInstance.delete(index: index!)
         dismiss(animated: true, completion: nil)
     }
 }

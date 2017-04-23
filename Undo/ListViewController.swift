@@ -61,6 +61,10 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navEditVC") as! UINavigationController
+        let evc: EditViewController = nc.childViewControllers.first! as! EditViewController
+        evc.index = indexPath.row
+        evc.initialName = todos[indexPath.row].name
+        evc.initialDueDate = todos[indexPath.row].dueDate
         present(nc, animated: true, completion: nil)
     }
 }
