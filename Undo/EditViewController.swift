@@ -27,9 +27,8 @@ class EditViewController: FormViewController {
             }
         
         let buttonRow: ButtonRow? = form.rowBy(tag: "deleteTodo")
-        let evc = self
         buttonRow?.onCellSelection { cell, row in
-            evc.dismiss(animated: true, completion: nil)
+            self.deletePressed()
         }
     }
 
@@ -38,6 +37,10 @@ class EditViewController: FormViewController {
     }
 
     @IBAction func savePressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func deletePressed() {
         dismiss(animated: true, completion: nil)
     }
 }

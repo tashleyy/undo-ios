@@ -33,6 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tnA-ld-Wa4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="206" id="BFs-p2-paG"/>
                             <constraint firstItem="tnA-ld-Wa4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="COC-4C-tkE"/>
@@ -322,15 +323,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4h-yb-M9o">
-                                                    <rect key="frame" x="5" y="5" width="40" height="40"/>
+                                                    <rect key="frame" x="2.5" y="2.5" width="45" height="45"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="0.37962863869863012" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="649-6H-EeU"/>
-                                                        <constraint firstAttribute="height" constant="40" id="ylv-Df-W22"/>
+                                                        <constraint firstAttribute="width" constant="45" id="8BM-FC-X81"/>
+                                                        <constraint firstAttribute="height" constant="45" id="puE-dS-ZVA"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="20"/>
+                                                            <real key="value" value="22.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -340,9 +341,24 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6V-hJ-B41">
+                                                    <rect key="frame" x="22" y="37" width="6" height="6"/>
+                                                    <color key="backgroundColor" red="0.91936051845550537" green="0.44805535674095154" blue="0.4157467782497406" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="6" id="WoX-pz-wC6"/>
+                                                        <constraint firstAttribute="width" constant="6" id="aPG-Jr-TnS"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="k6V-hJ-B41" firstAttribute="bottom" secondItem="jpM-yl-EaY" secondAttribute="bottomMargin" constant="1" id="Rr4-3o-iwM"/>
+                                            <constraint firstItem="k6V-hJ-B41" firstAttribute="centerX" secondItem="7MU-iI-4ha" secondAttribute="centerX" id="YbD-dr-CjX"/>
                                             <constraint firstItem="c4h-yb-M9o" firstAttribute="centerX" secondItem="jpM-yl-EaY" secondAttribute="centerX" id="cWt-0Y-xCt"/>
                                             <constraint firstItem="7MU-iI-4ha" firstAttribute="centerY" secondItem="jpM-yl-EaY" secondAttribute="centerY" id="eKc-7i-pip"/>
                                             <constraint firstItem="7MU-iI-4ha" firstAttribute="centerY" secondItem="c4h-yb-M9o" secondAttribute="centerY" id="fWR-rN-EpB"/>
@@ -352,6 +368,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="7MU-iI-4ha" id="bOL-Vc-NsB"/>
                                             <outlet property="selectedView" destination="c4h-yb-M9o" id="lZi-Oy-V4v"/>
+                                            <outlet property="todoView" destination="k6V-hJ-B41" id="bol-eM-ppZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

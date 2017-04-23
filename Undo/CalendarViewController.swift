@@ -13,6 +13,8 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthLabel: UILabel!
+    var todos: [[[Todo]]] = Array(repeating: Array(repeating: [], count: 31), count: 12)
+    static var lastViewedDate: Date?
 
     let formatter = DateFormatter()
 
@@ -20,6 +22,26 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
         super.viewDidLoad()
         navBar.delegate = self
         setupCalendarView()
+        TodoManager.sharedInstance.subscribe { self.reloadData() }
+        reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CalendarViewController.lastViewedDate = calendarView.visibleDates().monthDates.first!.date
+    }
+    
+    func reloadData() {
+        let data = TodoManager.sharedInstance.get()
+        for todo in data {
+            self.formatter.dateFormat = "MM"
+            let month = Int(formatter.string(from: todo.dueDate))
+            self.formatter.dateFormat = "dd"
+            let date = Int(formatter.string(from: todo.dueDate))
+            todos[month!-1][date!-1].append(todo)
+        }
+        let date = CalendarViewController.lastViewedDate ?? Date.init(timeIntervalSinceNow: 0)
+        calendarView.reloadData(with: date, animation: false, completionHandler: nil)
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -29,11 +51,9 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     func setupCalendarView() {
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
-        calendarView.visibleDates { visibleDates in
-            let date = visibleDates.monthDates.first!.date
-            self.formatter.dateFormat = "MMMM"
-            self.monthLabel.text = self.formatter.string(from: date)
-        }
+        let date = CalendarViewController.lastViewedDate ?? Date.init(timeIntervalSinceNow: 0)
+        formatter.dateFormat = "MMMM"
+        monthLabel.text = formatter.string(from: date)
     }
     
     func handleCellTextColor(cell: JTAppleCell?, cellState: CellState) {
@@ -84,6 +104,15 @@ extension CalendarViewController: JTAppleCalendarViewDataSource {
             cell.selectedView.isHidden = false
         } else {
             cell.selectedView.isHidden = true
+        }
+        self.formatter.dateFormat = "MM"
+        let monthInt = Int(formatter.string(from: date))
+        self.formatter.dateFormat = "dd"
+        let dateInt = Int(formatter.string(from: date))
+        if todos[monthInt!-1][dateInt!-1].count != 0 && cellState.dateBelongsTo == .thisMonth {
+            cell.todoView.isHidden = false
+        } else {
+            cell.todoView.isHidden = true
         }
         return cell
     }
