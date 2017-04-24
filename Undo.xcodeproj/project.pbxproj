@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0005AF7C1EAEC1E000A16A46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005AF7B1EAEC1E000A16A46 /* SettingsViewController.swift */; };
 		000962CB1EAAEE1600C7536E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000962CA1EAAEE1600C7536E /* GoogleService-Info.plist */; };
 		001A419F1EA973EB00D30D9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A419E1EA973EB00D30D9B /* AppDelegate.swift */; };
 		001A41A41EA973EB00D30D9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 001A41A21EA973EB00D30D9B /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0005AF7B1EAEC1E000A16A46 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		000962CA1EAAEE1600C7536E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Undo/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		001A419B1EA973EB00D30D9B /* Undo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Undo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		001A419E1EA973EB00D30D9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				00FB72521EAA734E003903B5 /* CalendarViewController.swift */,
 				00FB72541EAA7DB5003903B5 /* AddViewController.swift */,
 				00FB72561EAA7DC0003903B5 /* EditViewController.swift */,
+				0005AF7B1EAEC1E000A16A46 /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				009D35AF1EAAADE600F84B1F /* CalendarAppleCell.swift in Sources */,
 				00FB725D1EAA8790003903B5 /* Todo.swift in Sources */,
 				00FB72551EAA7DB5003903B5 /* AddViewController.swift in Sources */,
+				0005AF7C1EAEC1E000A16A46 /* SettingsViewController.swift in Sources */,
 				00FB72531EAA734E003903B5 /* CalendarViewController.swift in Sources */,
 				00FB72571EAA7DC0003903B5 /* EditViewController.swift in Sources */,
 				00A966491EA9ADB000186BEC /* LoginViewController.swift in Sources */,

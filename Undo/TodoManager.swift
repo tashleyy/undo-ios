@@ -14,6 +14,7 @@ class TodoManager: NSObject {
     var ref: FIRDatabaseReference!
     var todos: [Todo] = []
     var subscriptions: [() -> ()] = []
+    let formatter = DateFormatter()
 
     private override init() { }
     
@@ -22,28 +23,59 @@ class TodoManager: NSObject {
     }
     
     func download() {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
 
-        self.ref.observeSingleEvent(of: .value, with: { snapshot in
-            var result: [Todo] = []
-            for todoSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                guard let todo = todoSnapshot.value as? [String: String] else { continue }
-                result.append(Todo(name: todo["name"]!, dueDate: formatter.date(from: todo["dueDate"]!)!))
-            }
-            self.todos = result
-            self.processSubscriptions()
+        let device = UIDevice.current
+        guard device.isMultitaskingSupported else {
+            print("Multitasking not supported on this device.")
+            return
+        }
+        var bTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+        bTask = UIApplication.shared.beginBackgroundTask(expirationHandler: { 
+            UIApplication.shared.endBackgroundTask(bTask)
+            bTask = UIBackgroundTaskInvalid
         })
+        let serialQueue = DispatchQueue(label: "downloadQueue")
+        serialQueue.async {
+            self.ref.observeSingleEvent(of: .value, with: { snapshot in
+                var result: [Todo] = []
+                for todoSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                    guard let todo = todoSnapshot.value as? [String: String] else { continue }
+                    result.append(Todo(name: todo["name"]!, dueDate: self.formatter.date(from: todo["dueDate"]!)!))
+                }
+                self.todos = result
+                self.processSubscriptions()
+
+                UIApplication.shared.endBackgroundTask(bTask)
+                bTask = UIBackgroundTaskInvalid
+            })
+        }
     }
     
     func upload() {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        var value: [[String: String]] = [];
-        for todo in todos {
-            value.append(["name": todo.name, "dueDate": formatter.string(from: todo.dueDate)])
+
+        let device = UIDevice.current
+        guard device.isMultitaskingSupported else {
+            print("Multitasking not supported on this device.")
+            return
         }
-        ref.setValue(value)
+        var bTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+        bTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            UIApplication.shared.endBackgroundTask(bTask)
+            bTask = UIBackgroundTaskInvalid
+        })
+        let serialQueue = DispatchQueue(label: "uploadQueue")
+        serialQueue.async {
+            var value: [[String: String]] = [];
+            for todo in self.todos {
+                value.append(["name": todo.name, "dueDate": self.formatter.string(from: todo.dueDate)])
+            }
+            self.ref.setValue(value)
+
+            UIApplication.shared.endBackgroundTask(bTask)
+            bTask = UIBackgroundTaskInvalid
+        }
     }
 
     func get() -> [Todo] {
@@ -70,6 +102,6 @@ class TodoManager: NSObject {
     }
     
     func processSubscriptions() {
-        for subscription in self.subscriptions { subscription() }
+        for subscription in subscriptions { subscription() }
     }
 }

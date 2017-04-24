@@ -15,8 +15,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton = FBSDKLoginButton()
-        loginButton.center = self.view.center
-        self.view.addSubview(loginButton)
+        loginButton.center = view.center
+        view.addSubview(loginButton)
         loginButton.readPermissions = ["email"]
         loginButton.delegate = self
     }

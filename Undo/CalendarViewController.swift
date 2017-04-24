@@ -78,6 +78,12 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
         present(nc, animated: true, completion: nil)
     }
     
+    @IBAction func settingsPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let svc: SettingsViewController = storyboard.instantiateViewController(withIdentifier: "settingsVC") as! SettingsViewController
+        present(svc, animated: true, completion: nil)
+    }
+    
     @IBAction func prevPressed(_ sender: Any) {
         calendarView.scrollToSegment(.previous)
     }
