@@ -13,6 +13,7 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     var todos: [[[Todo]]] = Array(repeating: Array(repeating: [], count: 31), count: 12)
     static var lastViewedDate: Date?
 
@@ -21,6 +22,7 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navBar.delegate = self
+        tableView.dataSource = self
         setupCalendarView()
         TodoManager.sharedInstance.subscribe { self.reloadData() }
         reloadData()
@@ -33,10 +35,11 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     
     func reloadData() {
         let data = TodoManager.sharedInstance.get()
+        todos = Array(repeating: Array(repeating: [], count: 31), count: 12)
         for todo in data {
-            self.formatter.dateFormat = "MM"
+            formatter.dateFormat = "MM"
             let month = Int(formatter.string(from: todo.dueDate))
-            self.formatter.dateFormat = "dd"
+            formatter.dateFormat = "dd"
             let date = Int(formatter.string(from: todo.dueDate))
             todos[month!-1][date!-1].append(todo)
         }
@@ -100,14 +103,14 @@ extension CalendarViewController: JTAppleCalendarViewDataSource {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "calendarCell", for: indexPath) as! CalendarAppleCell
         cell.dateLabel.text = cellState.text
         handleCellTextColor(cell: cell, cellState: cellState)
-        if cellState.isSelected {
+        if cellState.isSelected && cellState.dateBelongsTo == .thisMonth {
             cell.selectedView.isHidden = false
         } else {
             cell.selectedView.isHidden = true
         }
-        self.formatter.dateFormat = "MM"
+        formatter.dateFormat = "MM"
         let monthInt = Int(formatter.string(from: date))
-        self.formatter.dateFormat = "dd"
+        formatter.dateFormat = "dd"
         let dateInt = Int(formatter.string(from: date))
         if todos[monthInt!-1][dateInt!-1].count != 0 && cellState.dateBelongsTo == .thisMonth {
             cell.todoView.isHidden = false
@@ -121,7 +124,14 @@ extension CalendarViewController: JTAppleCalendarViewDataSource {
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let validCell = cell as? CalendarAppleCell else { return }
-        validCell.selectedView.isHidden = false
+        if cellState.dateBelongsTo == .thisMonth {
+            validCell.selectedView.isHidden = false
+            tableView.reloadData()
+        } else if cellState.dateBelongsTo == .previousMonthWithinBoundary {
+            calendarView.scrollToSegment(.previous)
+        } else if cellState.dateBelongsTo == .followingMonthWithinBoundary {
+            calendarView.scrollToSegment(.next)
+        }
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -133,5 +143,35 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         let date = visibleDates.monthDates.first!.date
         formatter.dateFormat = "MMMM"
         monthLabel.text = formatter.string(from: date)
+    }
+}
+
+extension CalendarViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let date = calendarView.selectedDates.first {
+            formatter.dateFormat = "MM"
+            let monthInt = Int(formatter.string(from: date))
+            formatter.dateFormat = "dd"
+            let dateInt = Int(formatter.string(from: date))
+            return todos[monthInt!-1][dateInt!-1].count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellId = "calendarListCell"
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
+        if (cell == nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellId)
+        }
+        
+        let date = calendarView.selectedDates.first!
+        formatter.dateFormat = "MM"
+        let monthInt = Int(formatter.string(from: date))
+        formatter.dateFormat = "dd"
+        let dateInt = Int(formatter.string(from: date))
+
+        cell?.textLabel?.text = todos[monthInt!-1][dateInt!-1][indexPath.row].name
+        return cell!
     }
 }
