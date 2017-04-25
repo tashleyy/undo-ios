@@ -43,8 +43,8 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     @IBAction func settingsPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let svc: SettingsViewController = storyboard.instantiateViewController(withIdentifier: "settingsVC") as! SettingsViewController
-        present(svc, animated: true, completion: nil)
+        let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navSettingsVC") as! UINavigationController
+        present(nc, animated: true, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

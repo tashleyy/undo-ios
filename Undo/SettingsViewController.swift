@@ -21,6 +21,10 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         logoutButton.delegate = self
     }
 
+    @IBAction func backPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) { }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

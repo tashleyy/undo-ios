@@ -80,8 +80,8 @@ class CalendarViewController: UIViewController, UINavigationBarDelegate {
     
     @IBAction func settingsPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let svc: SettingsViewController = storyboard.instantiateViewController(withIdentifier: "settingsVC") as! SettingsViewController
-        present(svc, animated: true, completion: nil)
+        let nc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "navSettingsVC") as! UINavigationController
+        present(nc, animated: true, completion: nil)
     }
     
     @IBAction func prevPressed(_ sender: Any) {
