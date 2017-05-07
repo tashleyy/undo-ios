@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
 
 class TodoManager: NSObject {
     static let sharedInstance = TodoManager()
@@ -19,7 +20,17 @@ class TodoManager: NSObject {
     private override init() { }
     
     func configureDatabase() {
-        ref = FIRDatabase.database().reference().child("todos")
+        let graphRequest = FBSDKGraphRequest(graphPath: "/me?fields=email", parameters: nil)
+        graphRequest?.start(completionHandler: { (connection, result, error) in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let resultDict = result as! [String: Any]
+                print(resultDict)
+                self.ref = FIRDatabase.database().reference().child(resultDict["id"] as! String)
+                self.download()
+            }
+        })
     }
     
     func download() {

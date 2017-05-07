@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FIRApp.configure()
         TodoManager.sharedInstance.configureDatabase()
-        TodoManager.sharedInstance.download()
 
         // Override point for customization after application launch.
         return true
